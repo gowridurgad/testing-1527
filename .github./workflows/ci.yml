@@ -5,9 +5,11 @@ on:
   push:
     branches:
       - testing1
+      - main
   pull_request:
     branches:
       - testing1
+      - main
   workflow_dispatch:
 
 concurrency:
