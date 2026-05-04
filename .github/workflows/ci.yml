@@ -59,3 +59,5 @@ jobs:
         shell: bash
         run: |
           git status
+
+      - run: pnpm install
