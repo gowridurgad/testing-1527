@@ -35,19 +35,19 @@ jobs:
         with:
           show-progress: false
 
-      - name: Debug git state
+      - name: status
+        shell: bash
         run: |
-          git status --porcelain
-          git diff -- pnpm-lock.yaml | sed -n '1,80p'
+          git status
       - &install_pnpm
         name: Install pnpm
         uses: pnpm/action-setup@08c4be7e2e672a47d11bd04269e27e5f3e8529cb # v6.0.0
 
      
-      - name: Debug git state
+      - name: status
+        shell: bash
         run: |
-          git status --porcelain
-          git diff -- pnpm-lock.yaml | sed -n '1,80p'
+          git status
       - &install_node
         name: Set up node
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
@@ -57,14 +57,14 @@ jobs:
           cache-dependency-path: pnpm-lock.yaml
 
       
-      - name: Debug git state
+      - name: status
+        shell: bash
         run: |
-          git status --porcelain
-          git diff -- pnpm-lock.yaml | sed -n '1,80p'
+          git status
 
       - run: pnpm install
       
-      - name: Debug git state
+      - name: status
+        shell: bash
         run: |
-          git status --porcelain
-          git diff -- pnpm-lock.yaml | sed -n '1,80p'
+          git status
