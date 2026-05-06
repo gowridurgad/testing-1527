@@ -51,6 +51,8 @@ jobs:
         run: |
           git status --porcelain
           git diff -- pnpm-lock.yaml | sed -n '1,80p'
+      - name: Show pnpm-lock.yaml before setup-node
+        run: cat pnpm-lock.yaml
       - &install_node
         name: Set up node
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
@@ -58,6 +60,8 @@ jobs:
           node-version-file: package.json
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
+      - name: Show pnpm-lock.yaml before setup-node
+        run: cat pnpm-lock.yaml
 
       
       - name: Debug git state
