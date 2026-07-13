@@ -5,73 +5,70 @@ on:
 
 jobs:
   ubuntu-20-first:
-    name: Cache Python in Ubuntu 20.04
     runs-on: self-hosted
-
     container:
       image: ubuntu:20.04
-
     steps:
-      - name: Install basic tools
+      - name: Install tools
         run: |
           apt-get update
           DEBIAN_FRONTEND=noninteractive apt-get install -y \
-            bash curl ca-certificates git jq tar xz-utils
+            bash curl ca-certificates git jq tar xz-utils file
 
-      - name: Show environment
+      - name: OS info
         run: |
-          echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
-          echo "Image:"
           cat /etc/os-release
+          echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
 
-      - name: Setup Python 3.8
-        uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.8'
+          python-version: '3.11'
 
-      - name: Inspect cached Python
+      - name: Inspect Python
         run: |
           echo "pythonLocation=$pythonLocation"
-          ls -la "$pythonLocation" || true
-          python --version
-          python -c "import sys, ssl; print(sys.executable); print(ssl.OPENSSL_VERSION)"
+          which python || true
+          python --version || true
+          python -m pip --version || true
+          python -c "import sys; print(sys.executable)" || true
+          python -c "import ssl; print(ssl.OPENSSL_VERSION)" || true
+          ldd "$(which python)" || true
 
-      - name: Upgrade pip
+      - name: Warm cache
         run: python -m pip install --upgrade pip
 
   ubuntu-24-second:
-    name: Reuse cache from Ubuntu 24.04
     needs: ubuntu-20-first
     runs-on: self-hosted
-
     container:
       image: ubuntu:24.04
-
     steps:
-      - name: Install basic tools
+      - name: Install tools
         run: |
           apt-get update
           DEBIAN_FRONTEND=noninteractive apt-get install -y \
-            bash curl ca-certificates git jq tar xz-utils
+            bash curl ca-certificates git jq tar xz-utils file
 
-      - name: Show environment
+      - name: OS info
         run: |
-          echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
-          echo "Image:"
           cat /etc/os-release
+          echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
 
-      - name: Setup Python 3.8
-        uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.8'
+          python-version: '3.11'
 
-      - name: Inspect cached Python
+      - name: Inspect Python
         run: |
           echo "pythonLocation=$pythonLocation"
-          ls -la "$pythonLocation" || true
+          which python || true
           python --version || true
+          python -m pip --version || true
           python -c "import sys; print(sys.executable)" || true
           python -c "import ssl; print(ssl.OPENSSL_VERSION)" || true
+          ldd "$(which python)" || true
 
-      - name: Trigger likely failure
+      - name: Trigger bug
         run: python -m pip install --upgrade pip
