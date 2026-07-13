@@ -28,7 +28,7 @@ jobs:
 
       - name: Setup Python
         # uses: actions/setup-python@v6
-        uses: gowridurgad/setup-python@ fix-1087-os-isolated-toolcache
+        uses: gowridurgad/setup-python@fix-1087-os-isolated-toolcache
        
         with:
           python-version: '3.8'
@@ -64,7 +64,7 @@ jobs:
           echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
 
       - name: Setup Python
-        uses: gowridurgad/setup-python@ fix-1087-os-isolated-toolcache
+        uses: gowridurgad/setup-python@fix-1087-os-isolated-toolcache
         with:
           python-version: '3.8'
 
