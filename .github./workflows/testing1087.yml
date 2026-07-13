@@ -1,0 +1,77 @@
+name: Repro setup-python OS-incompatible cache reuse
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ubuntu-20-first:
+    name: Cache Python in Ubuntu 20.04
+    runs-on: self-hosted
+
+    container:
+      image: ubuntu:20.04
+
+    steps:
+      - name: Install basic tools
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y \
+            bash curl ca-certificates git jq tar xz-utils
+
+      - name: Show environment
+        run: |
+          echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
+          echo "Image:"
+          cat /etc/os-release
+
+      - name: Setup Python 3.8
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+
+      - name: Inspect cached Python
+        run: |
+          echo "pythonLocation=$pythonLocation"
+          ls -la "$pythonLocation" || true
+          python --version
+          python -c "import sys, ssl; print(sys.executable); print(ssl.OPENSSL_VERSION)"
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+  ubuntu-24-second:
+    name: Reuse cache from Ubuntu 24.04
+    needs: ubuntu-20-first
+    runs-on: self-hosted
+
+    container:
+      image: ubuntu:24.04
+
+    steps:
+      - name: Install basic tools
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y \
+            bash curl ca-certificates git jq tar xz-utils
+
+      - name: Show environment
+        run: |
+          echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
+          echo "Image:"
+          cat /etc/os-release
+
+      - name: Setup Python 3.8
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+
+      - name: Inspect cached Python
+        run: |
+          echo "pythonLocation=$pythonLocation"
+          ls -la "$pythonLocation" || true
+          python --version || true
+          python -c "import sys; print(sys.executable)" || true
+          python -c "import ssl; print(ssl.OPENSSL_VERSION)" || true
+
+      - name: Trigger likely failure
+        run: python -m pip install --upgrade pip
