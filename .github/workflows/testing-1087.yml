@@ -52,7 +52,7 @@ jobs:
           DEBIAN_FRONTEND=noninteractive apt-get install -y \
             bash curl ca-certificates git jq tar xz-utils file
             
-       - name: Fix pip cache permissions
+      - name: Fix pip cache permissions
         run: |
             mkdir -p /github/home/.cache/pip
             chown -R "$(whoami)" /github/home/.cache
