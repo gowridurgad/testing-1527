@@ -38,7 +38,7 @@ jobs:
           python -c "import ssl; print(ssl.OPENSSL_VERSION)" || true
           ldd "$(which python)" || true
       - name: Warm cache
-        run: python -m pip install --upgrade pip
+        run: python -m pip install --upgrade pip --root-user-action=ignore
 
   ubuntu-24-second:
     needs: ubuntu-20-first
@@ -76,4 +76,4 @@ jobs:
           python -c "import ssl; print(ssl.OPENSSL_VERSION)" || true
           ldd "$(which python)" || true
       - name: Trigger bug
-        run: python -m pip install --upgrade pip
+        run: python -m pip install --upgrade pip --root-user-action=ignore
