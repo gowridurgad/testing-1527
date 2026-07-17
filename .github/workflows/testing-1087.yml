@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  ubuntu-24-first:
+  ubuntu-20-first:
     runs-on: self-hosted
     container:
-      image: ubuntu:24.04
+      image: ubuntu:20.04
     steps:
       - name: Install tools
         run: |
@@ -25,7 +25,9 @@ jobs:
           fi
 
       - name: Setup Python
-        uses: actions/setup-python@v6
+        # uses: actions/setup-python@v6 
+        uses: gowridurgad/setup-python@arch-suffix-1087
+        
         with:
           python-version: '3.8'
 
@@ -41,11 +43,11 @@ jobs:
       - name: Warm cache
         run: python -m pip install --upgrade pip
 
-  ubuntu-20-second:
-    needs: ubuntu-24-first
+  ubuntu-24-second:
+    needs: ubuntu-20-first
     runs-on: self-hosted
     container:
-      image: ubuntu:20.04
+      image: ubuntu:24.04
     steps:
       - name: Install tools
         run: |
@@ -57,7 +59,8 @@ jobs:
           cat /etc/os-release
           echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
       - name: Setup Python
-        uses: actions/setup-python@v6
+        # uses: actions/setup-python@v6
+        uses: gowridurgad/setup-python@arch-suffix-1087
         with:
           python-version: '3.8'
 
