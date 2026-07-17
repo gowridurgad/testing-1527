@@ -9,7 +9,15 @@ jobs:
     container:
       image: ubuntu:20.04
     steps:
-      
+      - name: Install tools
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y \
+            bash curl ca-certificates git jq tar xz-utils file
+      - name: OS info
+        run: |
+          cat /etc/os-release
+          echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
 
       - name: Setup Python
         uses: actions/setup-python@v6 
@@ -37,7 +45,15 @@ jobs:
       image: ubuntu:24.04
     steps:
   
-      
+      - name: Install tools
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y \
+            bash curl ca-certificates git jq tar xz-utils file
+      - name: OS info
+        run: |
+          cat /etc/os-release
+          echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
       - name: Setup Python
         uses: actions/setup-python@v6
         # uses: gowridurgad/setup-python@root-1027
