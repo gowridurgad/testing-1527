@@ -22,7 +22,7 @@ jobs:
 
       - name: Setup Python
         # uses: actions/setup-python@v6 
-        uses: gowridurgad/setup-python@arch-suffix-1087
+        uses: gowridurgad/setup-python@root-1027
         
         with:
           python-version: '3.8'
@@ -56,7 +56,7 @@ jobs:
           echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
       - name: Setup Python
         # uses: actions/setup-python@v6
-        uses: gowridurgad/setup-python@arch-suffix-1087
+        uses: gowridurgad/setup-python@root-1027
         with:
           python-version: '3.8'
 
