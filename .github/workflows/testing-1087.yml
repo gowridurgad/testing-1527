@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Install tools
         run: |
-          dnf -y install bash curl ca-certificates git jq tar xz file findutils
+          dnf -y --allowerasing install bash ca-certificates git jq tar xz file findutils
 
       - name: OS info
         run: |
@@ -64,7 +64,7 @@ jobs:
     steps:
       - name: Install tools
         run: |
-          dnf -y install bash curl ca-certificates git jq tar xz file findutils
+         dnf -y --allowerasing install bash ca-certificates git jq tar xz file findutils
 
       - name: OS info
         run: |
