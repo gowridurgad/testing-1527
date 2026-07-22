@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  rhel9-first:
+  rhel10-first:
     runs-on: self-hosted
     container:
-      image: redhat/ubi9
+      image: redhat/ubi10
       # Mount the host's tool cache into the container so both jobs share it.
       options: --volume /opt/hostedtoolcache:/opt/hostedtoolcache
     env:
@@ -25,8 +25,8 @@ jobs:
           echo "AGENT_TOOLSDIRECTORY=$AGENT_TOOLSDIRECTORY"
           uname -a
       - name: Setup Python
-        # uses: actions/setup-python@v6
-        uses: gowridurgad/setup-python@root-1027
+        uses: actions/setup-python@v6
+        # uses: gowridurgad/setup-python@root-1027
         with:
           python-version: '3.13'
 
@@ -48,11 +48,11 @@ jobs:
       - name: Warm cache
         run: python -m pip install --upgrade pip
 
-  rhel10-second:
-    needs: rhel9-first
+  rhel9-second:
+    needs: rhel10-first
     runs-on: self-hosted
     container:
-      image: redhat/ubi10
+      image: redhat/ubi9
       options: --volume /opt/hostedtoolcache:/opt/hostedtoolcache
     env:
       RUNNER_TOOL_CACHE: /opt/hostedtoolcache
@@ -69,8 +69,8 @@ jobs:
           echo "AGENT_TOOLSDIRECTORY=$AGENT_TOOLSDIRECTORY"
           uname -a
       - name: Setup Python
-        # uses: actions/setup-python@v6
-        uses: gowridurgad/setup-python@root-1027
+        uses: actions/setup-python@v6
+        # uses: gowridurgad/setup-python@root-1027
         with:
           python-version: '3.13'
 
