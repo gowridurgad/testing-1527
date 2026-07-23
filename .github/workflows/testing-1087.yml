@@ -19,7 +19,7 @@ jobs:
           cat /etc/os-release
           echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
       - name: Setup Python
-        uses: gowridurgad/setup-python@version-suffix
+        uses: gowridurgad/setup-python@arch-suffix-v2
         with:
           python-version: '3.8'
 
@@ -51,7 +51,7 @@ jobs:
           cat /etc/os-release
           echo "RUNNER_TOOL_CACHE=$RUNNER_TOOL_CACHE"
       - name: Setup Python
-        uses: gowridurgad/setup-python@version-suffix
+        uses: gowridurgad/setup-python@arch-suffix-v2
         with:
           python-version: '3.8'
 
