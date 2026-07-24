@@ -22,6 +22,7 @@ jobs:
         uses: gowridurgad/setup-python@arch-suffix-v2
         with:
           python-version: '3.8'
+          scope-cache-by-os: true
 
       - name: Inspect Python
         run: |
@@ -54,6 +55,7 @@ jobs:
         uses: gowridurgad/setup-python@arch-suffix-v2
         with:
           python-version: '3.8'
+          scope-cache-by-os: true
 
       - name: Inspect Python
         run: |
