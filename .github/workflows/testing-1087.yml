@@ -29,6 +29,7 @@ jobs:
         uses: gowridurgad/setup-python@arch-suffix-v2
         with:
           python-version: '3.14'
+          scope-cache-by-os: true
 
       - name: Post-setup env
         run: |
@@ -73,6 +74,7 @@ jobs:
         uses: gowridurgad/setup-python@arch-suffix-v2
         with:
           python-version: '3.14'
+          scope-cache-by-os: true
 
       - name: Post-setup env
         run: |
