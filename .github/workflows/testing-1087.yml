@@ -21,7 +21,7 @@ jobs:
       - name: Setup Python
         uses: gowridurgad/setup-python@arch-suffix-v2
         with:
-          python-version: '3.12'
+          python-version: '3.8'
 
       - name: Inspect Python
         run: |
@@ -53,7 +53,7 @@ jobs:
       - name: Setup Python
         uses: gowridurgad/setup-python@arch-suffix-v2
         with:
-          python-version: '3.12'
+          python-version: '3.8'
 
       - name: Inspect Python
         run: |
